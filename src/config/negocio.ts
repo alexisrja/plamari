@@ -25,7 +25,7 @@ export const negocio = {
   whatsappVisible: "+52 55 1234 5678", // TODO: cómo se muestra en pantalla
   telefono: "+52 55 1234 5678", // TODO
   email: "ventas@marysolfloral.com", // TODO
-  direccion: "Villa Guerrero, Estado de México", // TODO: zona del cultivo
+  direccion: "Coatepec Harinas, Estado de México",
   horario: "Lunes a sábado, 7:00 a 18:00 h",
   instagram: "", // TODO: usuario sin @, deja vacío para ocultar el enlace
   facebook: "", // TODO: usuario o página, deja vacío para ocultar
@@ -38,7 +38,7 @@ export const negocio = {
   zonasEntrega: [
     "Entrega propia en CDMX y Estado de México",
     "Envío refrigerado al interior de la república (24-48 h)",
-    "Recolección directa en el cultivo sin costo",
+    "Recolección directa en el cultivo de Coatepec Harinas sin costo",
   ],
 } as const;
 
