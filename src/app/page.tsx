@@ -1,4 +1,5 @@
 import BotonWhatsApp from "@/components/BotonWhatsApp";
+import Cinta from "@/components/Cinta";
 import Cotizador from "@/components/Cotizador";
 import Cultivo from "@/components/Cultivo";
 import Footer from "@/components/Footer";
@@ -15,6 +16,7 @@ export default function Home() {
       <Header />
       <main className="flex-1">
         <Hero />
+        <Cinta />
         <Ventajas />
         <Variedades />
         <Precios />

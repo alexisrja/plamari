@@ -1,81 +1,106 @@
 import Image from "next/image";
 import { negocio } from "@/config/negocio";
 import { linkWhatsApp } from "@/lib/whatsapp";
+import Conteo from "./Conteo";
+
+const datos = [
+  { n: 12, sufijo: "+", etiqueta: "colores en corte" },
+  { n: 15, sufijo: " días", etiqueta: "de vida en florero" },
+  { n: 25, sufijo: "", etiqueta: "tallos por bonche" },
+];
 
 export default function Hero() {
   return (
-    <section
-      id="inicio"
-      className="relative overflow-hidden bg-crema pt-28 pb-16 sm:pt-36 sm:pb-24"
-    >
-      {/* Manchas de color de fondo */}
+    <section id="inicio" className="relative overflow-hidden bg-hoja text-hueso">
+      {/* Surcos del invernadero: líneas verticales muy tenues */}
       <div
         aria-hidden
-        className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full bg-clavel-suave opacity-30 blur-3xl"
+        className="pointer-events-none absolute inset-0 opacity-[0.07]"
+        style={{
+          backgroundImage:
+            "repeating-linear-gradient(90deg, transparent 0 88px, var(--oro-claro) 88px 89px)",
+        }}
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute -bottom-32 -left-20 h-80 w-80 rounded-full bg-hoja-clara opacity-20 blur-3xl"
+        className="pointer-events-none absolute -top-40 left-1/2 h-[38rem] w-[38rem] -translate-x-1/2 rounded-full bg-oro opacity-[0.09] blur-3xl"
       />
 
-      <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-5 lg:grid-cols-[1.05fr_0.95fr]">
+      <div className="relative mx-auto grid max-w-6xl items-center gap-14 px-5 pt-32 pb-16 sm:pt-40 lg:grid-cols-[1.1fr_0.9fr] lg:pb-24">
         <div>
-          <span className="inline-flex items-center gap-2 rounded-full border border-borde bg-surface px-4 py-1.5 text-xs font-medium tracking-wide text-hoja uppercase">
-            <span className="h-1.5 w-1.5 rounded-full bg-clavel" />
-            Cultivo propio · {negocio.direccion}
-          </span>
-
-          <h1 className="font-display mt-6 text-4xl leading-[1.05] font-semibold tracking-tight sm:text-5xl lg:text-6xl">
-            Claveles frescos,
-            <br />
-            <span className="text-clavel">directo del cultivo</span> a tu mesa.
-          </h1>
-
-          <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted">
-            {negocio.descripcionCorta} Vendemos al mayoreo para florerías y
-            eventos, y al menudeo para quien quiere regalar flor de verdad.
-          </p>
-
-          <div className="mt-8 flex flex-wrap gap-3">
-            <a
-              href={linkWhatsApp(
-                `Hola ${negocio.nombre}, vi su folleto en línea y quiero cotizar claveles.`,
-              )}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-full bg-clavel px-7 py-3.5 font-medium text-white shadow-lg shadow-clavel/25 transition-transform hover:-translate-y-0.5"
-            >
-              Cotizar por WhatsApp
-            </a>
-            <a
-              href="#catalogo"
-              className="rounded-full border border-hoja px-7 py-3.5 font-medium text-hoja transition-colors hover:bg-hoja hover:text-white"
-            >
-              Ver catálogo de colores
-            </a>
+          <div className="entra">
+            <p className="rotulo flex items-center gap-3 text-oro-claro">
+              <span className="h-px w-8 bg-oro" />
+              Coatepec Harinas · Edo. de México
+            </p>
           </div>
 
-          <dl className="mt-12 grid max-w-lg grid-cols-3 gap-6 border-t border-borde pt-6">
-            {[
-              { n: "12+", t: "colores disponibles" },
-              { n: "15 días", t: "de vida en florero" },
-              { n: "24 h", t: "del corte a tu puerta" },
-            ].map((d) => (
-              <div key={d.t}>
-                <dt className="font-display text-2xl font-semibold text-hoja">
-                  {d.n}
-                </dt>
-                <dd className="mt-1 text-sm text-muted">{d.t}</dd>
-              </div>
-            ))}
-          </dl>
+          <h1 className="font-display mt-7 text-[2.6rem] leading-[1.06] font-normal tracking-[-0.02em] sm:text-6xl lg:text-[4.2rem]">
+            <span className="cortina">
+              <span style={{ animationDelay: "80ms" }}>Clavel cortado</span>
+            </span>
+            <span className="cortina text-oro-claro">
+              <span style={{ animationDelay: "170ms" }}>esta mañana.</span>
+            </span>
+            <span className="cortina">
+              <span style={{ animationDelay: "260ms" }}>En tu local mañana.</span>
+            </span>
+          </h1>
+
+          <div className="entra" style={{ animationDelay: "300ms" }}>
+            <p className="mt-7 max-w-lg text-lg leading-relaxed text-bruma">
+              Somos el invernadero, no la bodega. Surtimos por bonche a
+              florerías y por ramo a quien va a regalar.
+            </p>
+          </div>
+
+          <div className="entra" style={{ animationDelay: "380ms" }}>
+            <div className="mt-9 flex flex-wrap gap-3">
+              <a
+                href={linkWhatsApp(
+                  `Hola ${negocio.nombre}, vi su catálogo en línea y quiero cotizar claveles.`,
+                )}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-sm bg-clavel px-8 py-4 font-medium text-white transition-[background-color,transform] duration-200 ease-out hover:-translate-y-0.5 hover:bg-clavel-vivo"
+              >
+                Pedir por WhatsApp
+              </a>
+              <a
+                href="#catalogo"
+                className="rounded-sm border border-linea-oscura px-8 py-4 font-medium text-hueso transition-colors duration-200 hover:border-oro hover:text-oro-claro"
+              >
+                Ver el índice de color
+              </a>
+            </div>
+          </div>
+
+          {/* Ficha de datos: la información que un florista pregunta primero */}
+          <div className="entra" style={{ animationDelay: "460ms" }}>
+            <dl className="mt-14 grid max-w-lg gap-px overflow-hidden rounded-sm border border-linea-oscura bg-linea-oscura sm:grid-cols-3">
+              {datos.map((d) => (
+                <div
+                  key={d.etiqueta}
+                  className="flex items-baseline gap-4 bg-hoja px-4 py-4 sm:block sm:py-5"
+                >
+                  <dt className="font-display text-3xl whitespace-nowrap text-oro-claro">
+                    <Conteo hasta={d.n} sufijo={d.sufijo} />
+                  </dt>
+                  <dd className="rotulo text-bruma sm:mt-2">{d.etiqueta}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
         </div>
 
-        {/* Logo de la distribuidora */}
-        <div className="relative mx-auto flex w-full max-w-md items-center justify-center">
+        <div className="entra-escala relative mx-auto w-full max-w-sm" style={{ animationDelay: "140ms" }}>
           <div
             aria-hidden
-            className="absolute h-[85%] w-[85%] rounded-full bg-white opacity-70 blur-2xl"
+            className="absolute inset-[8%] rounded-full bg-hueso opacity-95"
+          />
+          <div
+            aria-hidden
+            className="absolute inset-[4%] rounded-full border border-oro/40"
           />
           <Image
             src="/logo.png"
@@ -83,7 +108,7 @@ export default function Hero() {
             width={640}
             height={640}
             priority
-            className="relative w-full max-w-sm object-contain lg:max-w-md"
+            className="relative w-full object-contain p-[6%]"
           />
         </div>
       </div>

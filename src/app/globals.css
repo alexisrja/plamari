@@ -1,77 +1,215 @@
 @import "tailwindcss";
 
-:root {
-  /* Paleta: verde follaje + rojo clavel sobre papel cálido */
-  --background: #fbf8f4;
-  --foreground: #24211d;
-  --surface: #ffffff;
-  --muted: #6d675e;
-  --border: #e6dfd4;
+/* ============================================================
+   Mar y Sol — sistema visual
+   Concepto: la ficha de corte de un productor de clavel.
+   Verde de invernadero, oro del logo, datos en monoespaciada.
+   ============================================================ */
 
-  /* Tomados del logo: rojo clavel, rosa, verde follaje y dorado */
-  --clavel: #c8102e;
-  --clavel-suave: #f2a3bc;
-  --hoja: #2f5741;
-  --hoja-clara: #4d7a5f;
-  --crema: #f3ece0;
+:root {
+  /* Superficies claras: papel de capuchón, donde el color de la flor
+     tiene que leerse tal cual es. */
+  --lienzo: #f4efe4;
+  --hueso: #fbf8f1;
+  --tinta: #16150f;
+  --humo: #6a6455;
+  --linea: #ddd4c2;
+
+  /* Superficies oscuras: el invernadero. */
+  --hoja: #12291d;
+  --hoja-media: #1d4130;
+  --bruma: #a8b7ac;
+  --linea-oscura: #2c4b3a;
+
+  /* Marca, tomada del logo */
   --oro: #b8862b;
-  --oro-claro: #d4a843;
+  --oro-claro: #ddb765;
+  --clavel: #c1102c;
+  --clavel-vivo: #e0334f;
+  --rosa: #e88aa6;
+
+  /* Motion: una sola familia de curvas para todo el sitio */
+  --e-salida: cubic-bezier(0.16, 1, 0.3, 1);
+  --e-entrada: cubic-bezier(0.7, 0, 0.84, 0);
+  --t-micro: 180ms;
+  --t-normal: 320ms;
+  --t-salida: 200ms;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-surface: var(--surface);
-  --color-muted: var(--muted);
-  --color-borde: var(--border);
-  --color-clavel: var(--clavel);
-  --color-clavel-suave: var(--clavel-suave);
+  --color-lienzo: var(--lienzo);
+  --color-hueso: var(--hueso);
+  --color-tinta: var(--tinta);
+  --color-humo: var(--humo);
+  --color-linea: var(--linea);
   --color-hoja: var(--hoja);
-  --color-hoja-clara: var(--hoja-clara);
-  --color-crema: var(--crema);
+  --color-hoja-media: var(--hoja-media);
+  --color-bruma: var(--bruma);
+  --color-linea-oscura: var(--linea-oscura);
   --color-oro: var(--oro);
   --color-oro-claro: var(--oro-claro);
+  --color-clavel: var(--clavel);
+  --color-clavel-vivo: var(--clavel-vivo);
+  --color-rosa: var(--rosa);
 
-  --font-sans: var(--font-sans-base);
   --font-display: var(--font-display-base);
+  --font-sans: var(--font-sans-base);
+  --font-dato: var(--font-dato-base);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--lienzo);
+  color: var(--tinta);
   font-family: var(--font-sans-base), system-ui, sans-serif;
 }
 
-/* Desplazamiento suave al usar los enlaces del menú */
+/* Etiqueta de campo: el rótulo de una hoja de empaque */
+.rotulo {
+  font-family: var(--font-dato-base), ui-monospace, monospace;
+  font-size: 0.6875rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+/* Cifras alineadas en columna, para precios y conteos */
+.cifras {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Foco visible y consistente en todo el sitio */
+:where(a, button, input, select, textarea, summary):focus-visible {
+  outline: 2px solid var(--oro);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   html {
     scroll-behavior: smooth;
   }
 }
 
-/* Compensa el header fijo cuando se salta a una sección */
 section[id] {
-  scroll-margin-top: 5rem;
+  scroll-margin-top: 5.5rem;
 }
 
-/* Aparición progresiva de las secciones al hacer scroll */
+/* ---------- Entrada al cargar (mitad superior) ----------
+   Above the fold no se usa IntersectionObserver: si el JS tarda o falla,
+   el titular tiene que estar ahí de todos modos. Son animaciones CSS
+   que corren solas. */
+
+@keyframes sube-cortina {
+  from {
+    transform: translateY(110%);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@keyframes entra-abajo {
+  from {
+    opacity: 0;
+    transform: translateY(1.25rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes entra-escala {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.entra {
+  animation: entra-abajo 560ms var(--e-salida) both;
+}
+
+.entra-escala {
+  animation: entra-escala 760ms var(--e-salida) both;
+}
+
+/* Cortina: cada línea del titular sube desde su propio renglón, como el
+   botón que abre. El recorte lo hace overflow, no clip-path. */
+.cortina {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.06em;
+}
+
+.cortina > span {
+  display: block;
+  animation: sube-cortina 720ms var(--e-salida) both;
+}
+
+/* ---------- Aparición al entrar en pantalla (resto de la página) ---------- */
+
 .reveal {
   opacity: 0;
-  transform: translateY(1.25rem);
   transition:
-    opacity 0.6s ease-out,
-    transform 0.6s ease-out;
+    opacity var(--t-normal) var(--e-salida),
+    transform 520ms var(--e-salida);
 }
 
-.reveal.is-visible {
+.reveal[data-desde="abajo"] {
+  transform: translateY(1.5rem);
+}
+.reveal[data-desde="izquierda"] {
+  transform: translateX(-1.5rem);
+}
+.reveal[data-desde="escala"] {
+  transform: scale(0.96);
+}
+
+.reveal.visible {
   opacity: 1;
   transform: none;
 }
+
+/* ---------- Cinta de disponibilidad ---------- */
+
+@keyframes correr {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.cinta-pista {
+  animation: correr 48s linear infinite;
+}
+
+.cinta:hover .cinta-pista,
+.cinta:focus-within .cinta-pista {
+  animation-play-state: paused;
+}
+
+/* ---------- Respeto por quien pide menos movimiento ---------- */
 
 @media (prefers-reduced-motion: reduce) {
   .reveal {
     opacity: 1;
     transform: none;
     transition: none;
+  }
+  .cinta-pista {
+    animation: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

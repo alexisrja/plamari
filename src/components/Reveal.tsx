@@ -2,20 +2,30 @@
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
 
+type Desde = "abajo" | "izquierda" | "escala";
+
 /**
- * Envoltura que hace aparecer su contenido cuando entra en pantalla.
- * Si el usuario tiene activado "reducir movimiento", el CSS lo desactiva.
+ * Descubre su contenido cuando entra en pantalla.
+ *
+ * Solo para contenido por debajo del pliegue: lo de arriba usa las
+ * animaciones CSS de globals.css, que no dependen de que el JS cargue.
+ *
+ * El CSS anula todo esto si el sistema pide menos movimiento.
  */
 export default function Reveal({
   children,
+  desde = "abajo",
   delay = 0,
   className = "",
+  as: Tag = "div",
 }: {
   children: ReactNode;
+  desde?: Desde;
   delay?: number;
   className?: string;
+  as?: "div" | "li" | "span";
 }) {
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLElement>(null);
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -29,7 +39,7 @@ export default function Reveal({
           observador.disconnect();
         }
       },
-      { threshold: 0.12 },
+      { threshold: 0.15, rootMargin: "0px 0px -40px 0px" },
     );
 
     observador.observe(nodo);
@@ -37,12 +47,14 @@ export default function Reveal({
   }, []);
 
   return (
-    <div
-      ref={ref}
-      className={`reveal ${visible ? "is-visible" : ""} ${className}`}
+    <Tag
+      // El tipo de ref varía según la etiqueta; el comportamiento no.
+      ref={ref as never}
+      data-desde={desde}
+      className={`reveal ${visible ? "visible" : ""} ${className}`}
       style={{ transitionDelay: `${delay}ms` }}
     >
       {children}
-    </div>
+    </Tag>
   );
 }

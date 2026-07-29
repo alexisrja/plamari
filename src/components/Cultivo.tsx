@@ -1,17 +1,17 @@
 import { negocio } from "@/config/negocio";
-import Clavel from "./Clavel";
 import Reveal from "./Reveal";
 
+/** Esto sí es una secuencia: por eso lleva números y una línea que la une. */
 const pasos = [
   {
     titulo: "Siembra y cuidado",
     texto:
-      "Trabajamos el clavel en invernadero, con riego controlado y monitoreo de plaga sin exceso de químico.",
+      "Clavel en invernadero, con riego controlado y monitoreo de plaga sin exceso de químico.",
   },
   {
     titulo: "Corte en punto",
     texto:
-      "Cortamos el botón en el punto exacto para que abra en casa de tu cliente, no en el camión.",
+      "El botón se corta en el punto exacto para que abra en casa de tu cliente, no en el camión.",
   },
   {
     titulo: "Hidratación inmediata",
@@ -27,54 +27,66 @@ const pasos = [
 
 export default function Cultivo() {
   return (
-    <section id="cultivo" className="bg-hoja py-16 text-white sm:py-24">
-      <div className="mx-auto grid max-w-6xl items-center gap-14 px-5 lg:grid-cols-2">
-        <div>
-          <p className="text-sm font-medium tracking-wider text-clavel-suave uppercase">
-            Nosotros
+    <section id="cultivo" className="relative overflow-hidden bg-hoja py-20 text-hueso sm:py-28">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 opacity-[0.07]"
+        style={{
+          backgroundImage:
+            "repeating-linear-gradient(90deg, transparent 0 88px, var(--oro-claro) 88px 89px)",
+        }}
+      />
+
+      <div className="relative mx-auto grid max-w-6xl gap-16 px-5 lg:grid-cols-[0.85fr_1.15fr]">
+        <Reveal desde="izquierda">
+          <p className="rotulo flex items-center gap-3 text-oro-claro">
+            <span className="h-px w-8 bg-oro" />
+            El invernadero
           </p>
-          <h2 className="font-display mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
-            Somos productores, no intermediarios
+          <h2 className="font-display mt-5 text-4xl leading-tight tracking-[-0.02em] sm:text-5xl">
+            Sabemos qué día se cortó cada flor
           </h2>
-          <p className="mt-5 leading-relaxed text-white/80">
-            {negocio.nombre} cultiva clavel en {negocio.direccion}. Cada flor que
-            vendemos sale de nuestro invernadero, así que sabemos exactamente
-            qué día se cortó y cómo viajó. Eso es lo que hace que tu flor dure
-            más y que tu cliente vuelva.
+          <p className="mt-5 leading-relaxed text-bruma">
+            {negocio.nombreCompleto} cultiva en {negocio.direccion}. Cada tallo
+            que sale de aquí pasó por nuestras manos, así que conocemos su fecha
+            de corte y cómo viajó. Por eso te dura más y tu cliente regresa.
           </p>
 
-          <div className="mt-8 space-y-4">
+          <ul className="mt-9 space-y-3 border-t border-linea-oscura pt-6">
             {negocio.zonasEntrega.map((z) => (
-              <div key={z} className="flex gap-3 text-sm text-white/85">
-                <span aria-hidden className="text-clavel-suave">
-                  ●
+              <li key={z} className="flex gap-3 text-sm text-bruma">
+                <span aria-hidden className="text-oro">
+                  —
                 </span>
                 {z}
-              </div>
+              </li>
             ))}
-          </div>
+          </ul>
 
-          <p className="mt-8 text-sm text-white/70">
-            Horario de atención: {negocio.horario}
-          </p>
-        </div>
+          <p className="rotulo mt-8 text-bruma">{negocio.horario}</p>
+        </Reveal>
 
-        <ol className="space-y-3">
+        {/* Línea de proceso: la vertical dorada une los cuatro pasos */}
+        <ol className="relative self-start">
+          <span
+            aria-hidden
+            className="absolute top-4 bottom-[4.5rem] left-[1.05rem] w-px bg-linea-oscura"
+          />
           {pasos.map((p, i) => (
-            <Reveal key={p.titulo} delay={i * 90}>
-              <li className="flex gap-5 rounded-2xl bg-white/5 p-6 ring-1 ring-white/10">
-                <div className="shrink-0 pt-1">
-                  <Clavel color="var(--clavel-suave)" size={38} />
-                </div>
-                <div>
-                  <h3 className="font-display text-lg font-semibold">
-                    {i + 1}. {p.titulo}
+            <Reveal as="li" key={p.titulo} desde="abajo" delay={i * 90}>
+              <div className="relative flex gap-6 pb-10 last:pb-0">
+                <span className="rotulo relative z-10 flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-oro bg-hoja text-oro-claro">
+                  {i + 1}
+                </span>
+                <div className="pt-1">
+                  <h3 className="font-display text-xl tracking-tight">
+                    {p.titulo}
                   </h3>
-                  <p className="mt-1.5 text-sm leading-relaxed text-white/75">
+                  <p className="mt-2 text-sm leading-relaxed text-bruma">
                     {p.texto}
                   </p>
                 </div>
-              </li>
+              </div>
             </Reveal>
           ))}
         </ol>
