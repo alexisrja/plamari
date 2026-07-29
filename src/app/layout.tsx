@@ -15,7 +15,7 @@ const fraunces = Fraunces({
 });
 
 export const metadata: Metadata = {
-  title: `${negocio.nombre} | Claveles frescos al mayoreo y menudeo`,
+  title: `${negocio.nombreCompleto} | Claveles al mayoreo y menudeo`,
   description: negocio.descripcionCorta,
   keywords: [
     "claveles",
@@ -27,7 +27,9 @@ export const metadata: Metadata = {
     negocio.direccion,
   ],
   openGraph: {
-    title: `${negocio.nombre} | ${negocio.eslogan}`,
+    // La imagen de vista previa (la que sale al pegar el link en WhatsApp)
+    // se toma de src/app/opengraph-image.png automáticamente.
+    title: `${negocio.nombreCompleto} | ${negocio.eslogan}`,
     description: negocio.descripcionCorta,
     type: "website",
     locale: "es_MX",

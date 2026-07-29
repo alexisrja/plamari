@@ -1,9 +1,9 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { negocio } from "@/config/negocio";
 import { linkWhatsApp } from "@/lib/whatsapp";
-import Clavel from "./Clavel";
 
 const enlaces = [
   { href: "#catalogo", texto: "Catálogo" },
@@ -33,10 +33,20 @@ export default function Header() {
       }`}
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3">
-        <a href="#inicio" className="flex items-center gap-2">
-          <Clavel color="var(--clavel)" size={30} />
-          <span className="font-display text-xl font-semibold tracking-tight">
+        <a href="#inicio" className="flex items-center gap-2.5">
+          <Image
+            src="/logo.png"
+            alt={negocio.nombreCompleto}
+            width={44}
+            height={44}
+            priority
+            className="h-11 w-11 object-contain"
+          />
+          <span className="font-display text-lg leading-tight font-semibold tracking-tight sm:text-xl">
             {negocio.nombre}
+            <span className="block text-[10px] font-normal tracking-[0.18em] text-oro uppercase">
+              Distribuidora floral
+            </span>
           </span>
         </a>
 

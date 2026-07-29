@@ -1,10 +1,6 @@
-import { negocio, variedades } from "@/config/negocio";
+import Image from "next/image";
+import { negocio } from "@/config/negocio";
 import { linkWhatsApp } from "@/lib/whatsapp";
-import Clavel from "./Clavel";
-
-const decorativos = ["rojo", "rosa", "amarillo", "blanco", "fucsia"]
-  .map((id) => variedades.find((v) => v.id === id))
-  .filter((v): v is (typeof variedades)[number] => Boolean(v));
 
 export default function Hero() {
   return (
@@ -75,32 +71,20 @@ export default function Hero() {
           </dl>
         </div>
 
-        {/* Ramo ilustrado */}
-        <div className="relative mx-auto flex h-[22rem] w-full max-w-md items-end justify-center sm:h-[28rem]">
-          {decorativos.map((v, i) => {
-            const posiciones = [
-              { left: "8%", bottom: "2%", size: 130, rot: -16, z: 1 },
-              { left: "30%", bottom: "16%", size: 165, rot: -4, z: 3 },
-              { left: "54%", bottom: "6%", size: 120, rot: 12, z: 2 },
-              { left: "18%", bottom: "30%", size: 100, rot: -26, z: 2 },
-              { left: "56%", bottom: "28%", size: 108, rot: 22, z: 1 },
-            ];
-            const p = posiciones[i];
-            return (
-              <div
-                key={v.id}
-                className="absolute"
-                style={{
-                  left: p.left,
-                  bottom: p.bottom,
-                  zIndex: p.z,
-                  transform: `rotate(${p.rot}deg)`,
-                }}
-              >
-                <Clavel color={v.hex} size={p.size} conTallo />
-              </div>
-            );
-          })}
+        {/* Logo de la distribuidora */}
+        <div className="relative mx-auto flex w-full max-w-md items-center justify-center">
+          <div
+            aria-hidden
+            className="absolute h-[85%] w-[85%] rounded-full bg-white opacity-70 blur-2xl"
+          />
+          <Image
+            src="/logo.png"
+            alt={negocio.nombreCompleto}
+            width={640}
+            height={640}
+            priority
+            className="relative w-full max-w-sm object-contain lg:max-w-md"
+          />
         </div>
       </div>
     </section>

@@ -1,5 +1,5 @@
+import Image from "next/image";
 import { negocio } from "@/config/negocio";
-import Clavel from "./Clavel";
 
 export default function Footer() {
   const anio = new Date().getFullYear();
@@ -8,13 +8,17 @@ export default function Footer() {
     <footer className="border-t border-borde bg-surface">
       <div className="mx-auto grid max-w-6xl gap-8 px-5 py-12 sm:grid-cols-3">
         <div>
-          <div className="flex items-center gap-2">
-            <Clavel color="var(--clavel)" size={28} />
-            <span className="font-display text-lg font-semibold">
-              {negocio.nombre}
-            </span>
-          </div>
-          <p className="mt-3 text-sm text-muted">{negocio.eslogan}</p>
+          <Image
+            src="/logo.png"
+            alt={negocio.nombreCompleto}
+            width={160}
+            height={160}
+            className="h-28 w-28 object-contain"
+          />
+          <p className="mt-3 font-display text-lg font-semibold">
+            {negocio.nombreCompleto}
+          </p>
+          <p className="mt-1 text-sm text-muted">{negocio.eslogan}</p>
         </div>
 
         <div className="text-sm">
@@ -72,7 +76,7 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-borde py-5 text-center text-xs text-muted">
-        © {anio} {negocio.nombre}. Todos los derechos reservados.
+        © {anio} {negocio.nombreCompleto}. Todos los derechos reservados.
       </div>
     </footer>
   );

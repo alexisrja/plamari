@@ -12,7 +12,8 @@
 
 export const negocio = {
   // ---- Identidad -------------------------------------------------
-  nombre: "Plamari", // TODO: nombre real del negocio
+  nombre: "Mar y Sol", // nombre corto, el que se usa en los textos
+  nombreCompleto: "Distribuidora Mar y Sol Floral", // el del logo
   eslogan: "Claveles frescos de cultivo propio",
   descripcionCorta:
     "Cultivamos y distribuimos clavel estándar y mini clavel con corte del día, listos para florerías, eventos y hogares.",
@@ -23,7 +24,7 @@ export const negocio = {
   whatsapp: "5215512345678", // TODO: número real de WhatsApp
   whatsappVisible: "+52 55 1234 5678", // TODO: cómo se muestra en pantalla
   telefono: "+52 55 1234 5678", // TODO
-  email: "ventas@plamari.com", // TODO
+  email: "ventas@marysolfloral.com", // TODO
   direccion: "Villa Guerrero, Estado de México", // TODO: zona del cultivo
   horario: "Lunes a sábado, 7:00 a 18:00 h",
   instagram: "", // TODO: usuario sin @, deja vacío para ocultar el enlace

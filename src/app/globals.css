@@ -8,11 +8,14 @@
   --muted: #6d675e;
   --border: #e6dfd4;
 
+  /* Tomados del logo: rojo clavel, rosa, verde follaje y dorado */
   --clavel: #c8102e;
   --clavel-suave: #f2a3bc;
   --hoja: #2f5741;
   --hoja-clara: #4d7a5f;
   --crema: #f3ece0;
+  --oro: #b8862b;
+  --oro-claro: #d4a843;
 }
 
 @theme inline {
@@ -26,6 +29,8 @@
   --color-hoja: var(--hoja);
   --color-hoja-clara: var(--hoja-clara);
   --color-crema: var(--crema);
+  --color-oro: var(--oro);
+  --color-oro-claro: var(--oro-claro);
 
   --font-sans: var(--font-sans-base);
   --font-display: var(--font-display-base);
