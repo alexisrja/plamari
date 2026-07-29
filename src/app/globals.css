@@ -1,26 +1,72 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Paleta: verde follaje + rojo clavel sobre papel cálido */
+  --background: #fbf8f4;
+  --foreground: #24211d;
+  --surface: #ffffff;
+  --muted: #6d675e;
+  --border: #e6dfd4;
+
+  --clavel: #c8102e;
+  --clavel-suave: #f2a3bc;
+  --hoja: #2f5741;
+  --hoja-clara: #4d7a5f;
+  --crema: #f3ece0;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-surface: var(--surface);
+  --color-muted: var(--muted);
+  --color-borde: var(--border);
+  --color-clavel: var(--clavel);
+  --color-clavel-suave: var(--clavel-suave);
+  --color-hoja: var(--hoja);
+  --color-hoja-clara: var(--hoja-clara);
+  --color-crema: var(--crema);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-sans: var(--font-sans-base);
+  --font-display: var(--font-display-base);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans-base), system-ui, sans-serif;
+}
+
+/* Desplazamiento suave al usar los enlaces del menú */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Compensa el header fijo cuando se salta a una sección */
+section[id] {
+  scroll-margin-top: 5rem;
+}
+
+/* Aparición progresiva de las secciones al hacer scroll */
+.reveal {
+  opacity: 0;
+  transform: translateY(1.25rem);
+  transition:
+    opacity 0.6s ease-out,
+    transform 0.6s ease-out;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
